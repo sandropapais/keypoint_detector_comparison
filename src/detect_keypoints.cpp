@@ -28,8 +28,8 @@ void detKeypoints1()
     vector<cv::Point2f> corners;
     double t = (double)cv::getTickCount();
     cv::goodFeaturesToTrack(imgGray, corners, maxCorners, qualityLevel, minDistance, cv::Mat(), blockSize, useHarris, k);
-    t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
-    cout << "Shi-Tomasi with n= " << corners.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
+    double tend_1 = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
+    cout << "Shi-Tomasi with n= " << corners.size() << " keypoints in " << 1000 * tend_1 / 1.0 << " ms" << endl;
 
     for (auto it = corners.begin(); it != corners.end(); ++it)
     { // add corners to result vector
@@ -62,8 +62,8 @@ void detKeypoints1()
     vector<cv::KeyPoint> kptsFAST;
     t = (double)cv::getTickCount();
     detector->detect(imgGray, kptsFAST);
-    t = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
-    cout << "FAST with n= " << kptsFAST.size() << " keypoints in " << 1000 * t / 1.0 << " ms" << endl;
+    double tend_2 = ((double)cv::getTickCount() - t) / cv::getTickFrequency();
+    cout << "FAST with n= " << kptsFAST.size() << " keypoints in " << 1000 * tend_2 / 1.0 << " ms" << endl;
 
     visImage = img.clone();
     cv::drawKeypoints(img, kptsFAST, visImage, cv::Scalar::all(-1), cv::DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
@@ -77,8 +77,8 @@ void detKeypoints1()
     outfile.open("../out/results.txt");
     if (outfile.is_open())
     {
-        outfile << "Shi-Tomasi with n= "<< corners.size() << " keypoints in " << 1000 * t / 1.0 << " ms\n";
-        outfile << "FAST with n= " << kptsFAST.size() << " keypoints in " << 1000 * t / 1.0 << " ms\n";
+        outfile << "Shi-Tomasi with n= "<< corners.size() << " keypoints in " << 1000 * tend_1 / 1.0 << " ms\n";
+        outfile << "FAST with n= " << kptsFAST.size() << " keypoints in " << 1000 * tend_2 / 1.0 << " ms\n";
         outfile.close();
         cout << "Opened file" << endl;
     }

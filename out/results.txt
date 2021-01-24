@@ -1,2 +1,2 @@
-Shi-Tomasi with n= 1144 keypoints in 1.61492 ms
-FAST with n= 1864 keypoints in 1.61492 ms
+Shi-Tomasi with n= 1144 keypoints in 30.8253 ms
+FAST with n= 1864 keypoints in 2.54765 ms
